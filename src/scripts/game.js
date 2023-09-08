@@ -1,7 +1,13 @@
+import Player from '../scripts/models/player.js';
+
 export default class Game{
-    constructor(){}
+    constructor(gameWidth, gameHeight){
+        this.player = new Player(gameWidth, gameHeight, this);
+    }
 
-    update(){}
+    update(deltaTime){}
 
-    draw(){}
+    draw(ctx){
+        this.player.draw(ctx);
+    }
 }
