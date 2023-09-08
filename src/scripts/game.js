@@ -5,7 +5,9 @@ export default class Game{
         this.player = new Player(gameWidth, gameHeight, this);
     }
 
-    update(deltaTime){}
+    update(deltaTime){
+        this.player.update(deltaTime);
+    }
 
     draw(ctx){
         this.player.draw(ctx);

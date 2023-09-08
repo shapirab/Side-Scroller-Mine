@@ -10,6 +10,7 @@ window.addEventListener('load', function(){
    
     let lastTime = 0;
     function animate(timeStamp){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         let deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
         game.update(deltaTime);
