@@ -41,12 +41,24 @@ export default class Player{
     jump(input){
         if(input.inputs.indexOf('ArrowUp') > -1 &&
             this.isOnGround()){
-                this.speed.y -= 32;
+                this.speed.y = -20;
+                this.frameY = 1;
+                this.maxFrames = 6;
         }
         else if(input.inputs.indexOf('ArrowUp') === -1 &&
         !this.isOnGround()){
-            this.speed.y += this.gravity;
-        }           
+            this.speed.y += this.gravity;        
+            this.maxFrames = 8;
+        } 
+
+        if(!this.isOnGround()){
+            this.frameY = 1;
+            this.maxFrames = 6;
+        }
+        else if(this.isOnGround()){
+            this.frameY = 0;
+            this.maxFrames = 8;
+        }          
     }
 
     update(deltaTime, input){
