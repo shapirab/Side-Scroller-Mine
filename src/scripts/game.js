@@ -31,7 +31,12 @@ export default class Game{
         this.handleEnemies(deltaTime);
         this.player.update(deltaTime, this.input);
         this.background.update();
-        this.enemies.forEach(enemy => enemy.update(deltaTime));
+        this.enemies.forEach((enemy, index) => {
+            enemy.update(deltaTime);
+            if(enemy.markedForDeletion){
+                this.enemies.splice(index, 1);
+            }
+        });
     }
 
     draw(ctx){

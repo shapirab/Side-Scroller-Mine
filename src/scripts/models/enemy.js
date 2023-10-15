@@ -16,6 +16,7 @@ export default class Enemy{
         this.frameTimer = 0;
         this.framesPerSecond = 20;
         this.frameInterval = 1000 / this.framesPerSecond;
+        this.markedForDeletion = false;
     }
 
     animateSprites(deltaTime){
@@ -35,6 +36,9 @@ export default class Enemy{
 
     update(deltaTime){
         this.animateSprites(deltaTime);
+        if(this.position.x < 0 - this.width){
+            this.markedForDeletion = true;
+        }
         this.position.x -= this.speedX;
     }
 
