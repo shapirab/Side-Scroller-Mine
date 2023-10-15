@@ -5,15 +5,38 @@ export default class Enemy{
         this.width = 160;
         this.height = 119;
         this.position = {
-            x: this.gameWidth -50,
-            y: this.gameHeight - this.width
+            x: this.gameWidth,
+            y: this.gameHeight - this.height
         }
+
+        this.speedX = 8;
 
         this.frameX = 0;
         this.maxFrames = 5;
+        this.frameTimer = 0;
+        this.framesPerSecond = 20;
+        this.frameInterval = 1000 / this.framesPerSecond;
     }
 
-    update(){}
+    animateSprites(deltaTime){
+        if(this.frameTimer > this.frameInterval){
+            if(this.frameX >= this.maxFrames){
+                this.frameX = 0;
+            }
+            else{
+                this.frameX++;
+            }
+            this.frameTimer = 0;
+        }
+        else{
+            this.frameTimer += deltaTime;            
+        }
+    }
+
+    update(deltaTime){
+        this.animateSprites(deltaTime);
+        this.position.x -= this.speedX;
+    }
 
     draw(ctx){
         ctx.drawImage(enemy, this.frameX * this.width,
