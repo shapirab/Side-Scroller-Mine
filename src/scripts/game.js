@@ -14,6 +14,7 @@ export default class Game{
         this.enemies = [];
         this.enemyInterval = 1000;//This is the max time interval between enemies
         this.enemyTimer = 0;//This times the time passed between enemies
+        this.hit = false;
     }
 
     handleEnemies(deltaTime){
@@ -27,6 +28,22 @@ export default class Game{
         }
     }
 
+    handleHits(){
+        this.enemies.forEach(enemy => {
+            let distanceX = (enemy.position.x + enemy.width / 2) - 
+                            (this.player.x + enemy.width / 2);
+
+            let distanceY = (enemy.position.y + enemy.height / 2) - 
+                            (this.player.y + enemy.height / 2);
+
+            let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+            if(distance < this.player.width / 2 + enemy.width / 2){
+                this.hit = true;
+            }
+        });
+    }
+
     update(deltaTime){
         this.handleEnemies(deltaTime);
         this.player.update(deltaTime, this.input);
@@ -35,8 +52,14 @@ export default class Game{
             enemy.update(deltaTime);
             if(enemy.markedForDeletion){
                 this.enemies.splice(index, 1);
-            }
+            };
+            // if(this.player.x + this.player.width >= enemy.position.x && 
+            //     this.player.x < enemy.position.x + enemy.width &&
+            //     this.player.isOnGround()){
+            //     this.hit = true;
+            // }           
         });
+        this.handleHits();
     }
 
     draw(ctx){

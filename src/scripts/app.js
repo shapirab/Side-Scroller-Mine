@@ -15,7 +15,9 @@ window.addEventListener('load', function(){
         lastTime = timeStamp;
         game.update(deltaTime);
         game.draw(ctx);
-        requestAnimationFrame(animate);
+        if(!game.hit){
+            requestAnimationFrame(animate);
+        }
     }
 
     animate(0);
