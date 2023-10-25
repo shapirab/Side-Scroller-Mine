@@ -15,6 +15,7 @@ export default class Game{
         this.enemyInterval = 1000;//This is the max time interval between enemies
         this.enemyTimer = 0;//This times the time passed between enemies
         this.hit = false;
+        this.score = 0;
     }
 
     handleEnemies(deltaTime){
@@ -44,6 +45,13 @@ export default class Game{
         });
     }
 
+    displayScoreText(ctx){
+        let scoreText = 'Score: ' + this.score;
+        ctx.font = "50px Comic Sans MS";
+        ctx.fillStyle = "#fff";
+        ctx.fillText(scoreText, 100, 150);
+    }
+
     update(deltaTime){
         this.handleEnemies(deltaTime);
         this.player.update(deltaTime, this.input);
@@ -52,12 +60,7 @@ export default class Game{
             enemy.update(deltaTime);
             if(enemy.markedForDeletion){
                 this.enemies.splice(index, 1);
-            };
-            // if(this.player.x + this.player.width >= enemy.position.x && 
-            //     this.player.x < enemy.position.x + enemy.width &&
-            //     this.player.isOnGround()){
-            //     this.hit = true;
-            // }           
+            };                   
         });
         this.handleHits();
     }
@@ -66,5 +69,6 @@ export default class Game{
         this.background.draw(ctx);
         this.player.draw(ctx);
         this.enemies.forEach(enemy => enemy.draw(ctx));
+        this.displayScoreText(ctx);
     }
 }
