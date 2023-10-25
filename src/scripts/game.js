@@ -45,6 +45,14 @@ export default class Game{
         });
     }
 
+    handleScore(){
+        this.enemies.forEach(enemy => {
+            if(enemy.position.x == 0){
+                this.score++;
+            }
+        });
+    }
+
     displayScoreText(ctx){
         let scoreText = 'Score: ' + this.score;
         ctx.font = "50px Comic Sans MS";
@@ -63,6 +71,7 @@ export default class Game{
             };                   
         });
         this.handleHits();
+        this.handleScore();
     }
 
     draw(ctx){
