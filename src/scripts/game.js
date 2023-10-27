@@ -8,7 +8,6 @@ export default class Game{
         this.gameHeight = gameHeight;
         this.gameWidth = gameWidth;
         this.player = new Player(gameWidth, gameHeight, this);
-        //this.enemy = new Enemy(gameWidth, gameHeight);
         this.background = new Background(gameWidth, gameHeight);
         this.input = new InputHandler();
         this.enemies = [];
@@ -16,6 +15,14 @@ export default class Game{
         this.enemyTimer = 0;//This times the time passed between enemies
         this.hit = false;
         this.score = 0;
+    }
+
+    restart(){
+        console.log('restart fn called');
+        this.enemies = [];
+        this.hit = false;
+        this.score = 0;
+        this.player = new Player(this.gameWidth, this.gameHeight, this);
     }
 
     handleEnemies(deltaTime){

@@ -7,6 +7,16 @@ window.addEventListener('load', function(){
     canvas.height = this.window.innerHeight;
 
     let game = new Game(canvas.width, canvas.height);
+
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter'){
+            if(game.hit){
+                console.log('restart event was called');
+                game.restart();
+                animate(0);
+            }
+        }
+    });
    
     let lastTime = 0;
     function animate(timeStamp){
@@ -17,7 +27,7 @@ window.addEventListener('load', function(){
         game.draw(ctx);
         if(!game.hit){
             requestAnimationFrame(animate);
-        }
+        }       
     }
 
     animate(0);
